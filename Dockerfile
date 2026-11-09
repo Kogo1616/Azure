@@ -2,11 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY Test.csproj ./
-RUN dotnet restore Test.csproj
+COPY Test/Test/Test.csproj Test/Test/
+RUN dotnet restore Test/Test/Test.csproj
 
-COPY . ./
-RUN dotnet publish Test.csproj -c Release -o /app/publish --no-restore
+COPY Test/Test/ Test/Test/
+RUN dotnet publish Test/Test/Test.csproj -c Release -o /app/publish --no-restore
 
 # Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
