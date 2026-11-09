@@ -14,6 +14,9 @@ WORKDIR /app
 
 # The app listens on 8080 (the default HTTP port in .NET 8+ images)
 ENV ASPNETCORE_HTTP_PORTS=8080
+# Trust X-Forwarded-Proto/For from the hosting proxy so the app (and Swagger)
+# sees the public https URL instead of the internal http one
+ENV ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
 EXPOSE 8080
 
 COPY --from=build /app/publish ./
